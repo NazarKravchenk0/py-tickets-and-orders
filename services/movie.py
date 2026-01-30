@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Iterable
 
 from django.db import transaction
 
@@ -15,7 +15,14 @@ def get_movies(title: Optional[str] = None):
 
 
 @transaction.atomic
-def create_movie(*, title: str, description: str, duration: int, genres, actors) -> Movie:
+def create_movie(
+    *,
+    title: str,
+    description: str,
+    duration: int,
+    genres: Iterable[int],
+    actors: Iterable[int],
+) -> Movie:
     movie = Movie.objects.create(
         title=title,
         description=description,
