@@ -1,11 +1,12 @@
-from typing import Optional, Iterable
+from typing import Iterable, Optional
 
 from django.db import transaction
+from django.db.models import QuerySet
 
 from db.models import Movie
 
 
-def get_movies(title: Optional[str] = None):
+def get_movies(title: Optional[str] = None) -> QuerySet[Movie]:
     queryset = Movie.objects.all()
 
     if title is not None:
